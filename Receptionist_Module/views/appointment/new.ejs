@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+<title>Home</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<body>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-10">
+                <div class="card">
+                    <h5 class="card-header">Create New Appointment</h5>
+                    <div class="card-body">
+                        <form id="newPatientForm">
+                            <div class="form-group row">
+                                <label for="staticPatientId" class="col-sm-4 col-form-label">Patient Id:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticPatientId"
+                                        value="<%= patient.patient_id %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticName" class="col-sm-4 col-form-label">Patient Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticName"
+                                        value="<%= patient.first_name + ' ' + patient.last_name %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticPhoneNumber" class="col-sm-4 col-form-label">Phone number:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticPhoneNumber"
+                                        value="<%= patient.phone_number %>">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <hr><br><br>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputDoctorType">Type of doctor</label>
+                                    <select name="doctorType" id="inputDoctorType" class="form-control">
+                                        <option selected value="0">Choose...</option>
+                                        <% doctorTypes.forEach(type => { %>
+                                        <option value="<%= type.doctor_type_id %>"><%= type.doctor_type%></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6 d-none">
+                                    <label for="inputDoctorName">Name of the doctor</label>
+                                    <select id="inputDoctorName" class="form-control">
+                                        <option value="0" selected>Choose...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <fieldset class="form-group mt-3">
+                                <div class="row d-none" >
+                                    <legend class="col-form-label col-sm-3 pt-0">Select session</legend>
+                                    <div class="col-sm-9" id="inputSession"></div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group d-flex align-items-end row">
+                                <div class="col-md-6 d-none">
+                                    <label for="inputDate">Date</label>
+                                    <input type="date" class="form-control" id="inputDate" name="date" >
+                                </div> 
+                                <div class="col-md-6 d-none">
+                                    <button class="btn btn-warning btn-sm" id="dataButton">Get more info</button>
+                                </div>                       
+                            </div>
+                            <div class="col-sm-12 my-4 d-none">
+                                <hr>
+                                <div class="text-center">
+                                    <h4 class="lead">Doctor's Session Details</h4>
+                                </div>
+                                <div id="sessionContent"></div>
+                            </div>
+                            <div  class="mt-4">
+                                <button type="submit" class="btn btn-danger d-none px-4" id="cancelButton">Cancel</button>
+                                <button type="submit" class="btn btn-success px-4" id="nextButton">Next</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="../js/appointment.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+<title>Home</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<body>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-10">
+                <div class="card">
+                    <h5 class="card-header">Appointment Details</h5>
+                    <div class="card-body">
+                        <form id="newPatientForm">
+                            <div class="form-group row">
+                                <label for="staticPatientId" class="col-sm-4 col-form-label">Patient Id:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticPatientId"
+                                        value="<%= appointment.patient_id %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticName" class="col-sm-4 col-form-label">Patient Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticName"
+                                        value="<%= appointment.patient_name %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticDoctorName" class="col-sm-4 col-form-label">Doctor Name:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticDoctorName"
+                                        value="<%= appointment.doctor_name %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticDate" class="col-sm-4 col-form-label">Date:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticDate"
+                                        value="<%= appointment.date %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticTime" class="col-sm-4 col-form-label">Scheduled time:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticTime"
+                                        value="<%= appointment.scheduled_time %>">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticSessionDuration" class="col-sm-4 col-form-label">Session duration:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticSessionDuration"
+                                        value="<%= appointment.start_time %> - <%= appointment.end_time %> ">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticPatientNumber" class="col-sm-4 col-form-label">Patient number:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="staticPatientNumber"
+                                        value="<%= appointment.patient_number %> %> ">
+                                </div>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<title>Home</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<body>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-12">
+
+                <% if (patient) { %>
+
+                <div class="card">
+                    <h5 class="card-header"><%= "Patient ID: #"+ patient.patient_id %></h5>
+                    <div class="card-body">
+                        <div class="col-md-8">
+                            <form>
+                                <div class="form-group row">
+                                    <label for="staticName" class="col-sm-4 col-form-label">Patient Name:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="staticName"
+                                            value="<%= patient.first_name + ' ' + patient.last_name %>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticPhoneNumber" class="col-sm-4 col-form-label">Phone number:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext"
+                                            id="staticPhoneNumber" value="<%= patient.phone_number %>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-4 col-form-label">Email:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="staticEmail"
+                                            value="<%= patient.email %>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticBirthDate" class="col-sm-4 col-form-label">Birth date:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="staticBirthDate"
+                                            value="<%= patient.birth_date %>">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticAddress" class="col-sm-4 col-form-label">Home address:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control-plaintext" id="staticAddress"
+                                            value="<%= patient.house_number %>, <%= patient.street %>, <%= patient.city %>">
+                                    </div>
+                                </div>
+                       
+                            </form>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="<%= '/appointment/new?patientId='+patient.patient_id %>" class="btn btn-sm btn-primary">Create new appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <% } else {%>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h6 class="card-title">Patient not registered! Register to set an appointment.</h6>
+                        <div class="row">
+                            <div class="col-md-6 mt-2">
+                                <a class="btn btn-primary" href="/">Back to home</a>
+                                <a class="btn btn-success mx-4" href="/patient/new">Register new patient</a>
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
