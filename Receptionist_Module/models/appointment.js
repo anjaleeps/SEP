@@ -10,7 +10,6 @@ Appointment.prototype.findOne = async function (session_id, date) {
         (a.scheduled_time + s.time_per_patient) as appointment_time \
         from appointment a inner join session s on a.session_id=s.session_id \
         where a.session_id=$1 and a.date=$2 order by a.patient_number desc limit 1"
-
     try {
         let result = await db.oneOrNone(query, [session_id, date])
         console.log(result)
@@ -43,8 +42,8 @@ Appointment.prototype.findOneById = async function (appointmentId) {
 }
 
 Appointment.prototype.create = async function (appointment) {
-    let query = "INSERT INTO appointment (session_id, date, patient_id, patient_number, scheduled_time) \
-        VALUES (${appointment.sessionId}, ${appointment.date},  ${appointment.patientId}, \
+    let query = "INSERT INTO appointment (session_id, date, patient_id, patient_number, scheduled_time, status) \
+        VALUES (${appointment.sessionId}, ${appointment.date},  ${appointment.patientId, 'created'}, \
         ${appointment.patientNumber}, ${appointment.scheduledTime}) RETURNING appointment_id"
 
     try {

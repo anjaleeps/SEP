@@ -1,3 +1,6 @@
 Receptionist_Module/node_modules/
 Receptionist_Module/package-lock.json
 Receptionist_Module/.env
+Doctor_Module/node_modules/
+Doctor_Module/package-lock.json
+Doctor_Module/.env
