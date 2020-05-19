@@ -21,7 +21,7 @@ body {
     font-family: 'Ruda', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
-    font-size:27px;
+    font-size:13px;
 }
 
 ul li {
@@ -2136,11 +2136,11 @@ ul.my-friends li .friends-pic {
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	position: relative;
-	text-align: center;
 }
 
 .activity-panel h5{
-	font-weight: 700;
+    font-weight: 700;
+    display: inline-block;
 }
 
 /* INVOICE CONF */
