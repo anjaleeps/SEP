@@ -37,36 +37,65 @@
                     <div class="form-panel">
                         <div class=" form">
                             <form class="cmxform form-horizontal style-form" id="commentForm">
-                                <div class="form-group ">
-                                    <label for="cname" class="control-label col-lg-2">Name (required)</label>
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-sm-2 control-label">Appointment ID</label>
                                     <div class="col-lg-10">
-                                        <input class=" form-control" id="cname" name="name" minlength="2" type="text"
-                                            required />
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="cemail" class="control-label col-lg-2">E-Mail (required)</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control " id="cemail" type="email" name="email" required />
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="curl" class="control-label col-lg-2">URL (optional)</label>
-                                    <div class="col-lg-10">
-                                        <input class="form-control " id="curl" type="url" name="url" />
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="ccomment" class="control-label col-lg-2">Your Comment (required)</label>
-                                    <div class="col-lg-10">
-                                        <textarea class="form-control " id="ccomment" name="comment"
-                                            required></textarea>
+                                        <p class="form-control-static">#<%= appointmentId %></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="cdiagnosis" class="control-label col-lg-2">Diagnosis Name</label>
+                                    <div class="col-lg-10">
+                                        <select class="form-control" id="cdiagnosis">
+                                            <% diagnosisTypes.forEach(type => { %>
+                                            <option value=<%= `${type.diagnosis_type_id}` %>><%= type.diagnosis_type%>
+                                            </option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="cprescription" class="control-label col-lg-2">Drug Names</label>
+
+                                    <div class="col-lg-8">
+                                        <select class="form-control" id="cprescription">
+                                            <% drugs.forEach(drug => { %>
+                                            <option value=<%= `${drug.drug_id}` %>><%= drug.drug_name %></option>
+                                            <% }) %>
+                                        </select>
+                                        <div class="row mt" id="selectedDrugs">
+                                            <template id="temp">
+                                                <div class="col-md-3">
+                                                    <div class="alert alert-warning alert-dismissable"
+                                                        style="padding: 5px; padding-right:35px;">
+                                                        <button type="button closeButton" class="close" data-dismiss="alert"
+                                                            aria-hidden="true">&times;</button>
+                                                        <strong>Warning!</strong>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div class="log-lg-2">
+                                        <button class="btn btn-theme02" id="addButton" type="submit">Add</button>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group ">
+                                    <label for="ccomment" class="control-label col-lg-2">Special Notes</label>
+                                    <div class="col-lg-10">
+                                        <textarea class="form-control " id="ccomment" name="comment"></textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
-                                        <button class="btn btn-theme" type="submit">Save</button>
-                                        <button class="btn btn-theme04" type="button">Cancel</button>
+                                        <button id="submitButton" class="btn btn-theme" type="submit">Save</button>
+                                        <a href=<%= `/appointment/${appointmentId}` %> class="btn btn-theme04" >Cancel</a>
                                     </div>
                                 </div>
                             </form>
@@ -79,6 +108,7 @@
         </section>
 
         <%- include ('../partials/footer') %>
+        <script src="/js/appointment.js"></script>
 
 </body>
 
