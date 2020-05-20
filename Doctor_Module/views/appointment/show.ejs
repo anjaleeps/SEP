@@ -60,9 +60,9 @@
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">created</a></li>
-                    <li><a href="#">missed</a></li>
-                    <li><a href="#">completed</a></li>
+                    <li><a href="javascript:void(0)" class="statusLabel">created</a></li>
+                    <li><a href="javascript:void(0)" class="statusLabel">missed</a></li>
+                    <li><a href="javascript:void(0)" class="statusLabel">completed</a></li>
                   </ul>
                 </div>
               </p>
@@ -103,7 +103,7 @@
                       <div class="detailed mt">
                         <div class="recent-activity">
                           <% diagnoses.forEach(diagnosis => { %>
-                          <a href=<%= `/diagnosis/${diagnosis.diagnosis_id}` %>>
+                          <a href=<%= `/appointment/${appointment.appointment_id}/diagnosis/${diagnosis.diagnosis_id}` %>>
                             <div class="activity-panel">
                               <div>
                                 <h5><%= diagnosis.diagnosis_type.toUpperCase() %></h5>
@@ -259,6 +259,7 @@
         </div>
     </section>
     <%- include ('../partials/footer') %>
+    <script src="/js/status.js"></script>
 </body>
 
 </html>

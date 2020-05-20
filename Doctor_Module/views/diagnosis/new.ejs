@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 col-sm-2 control-label">Appointment ID</label>
                                     <div class="col-lg-10">
-                                        <p class="form-control-static">#<%= appointmentId %></p>
+                                        <p class="form-control-static"><%= appointmentId %></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -91,13 +91,14 @@
                                     </div>
                                 </div>
 
-
                                 <div class="form-group">
                                     <div class="col-lg-offset-2 col-lg-10">
                                         <button id="submitButton" class="btn btn-theme" type="submit">Save</button>
                                         <a href=<%= `/appointment/${appointmentId}` %> class="btn btn-theme04" >Cancel</a>
                                     </div>
                                 </div>
+                                <input type="hidden" id="appointmentId" value=<%= `${appointmentId}` %>
+
                             </form>
                         </div>
                     </div>
@@ -108,7 +109,7 @@
         </section>
 
         <%- include ('../partials/footer') %>
-        <script src="/js/appointment.js"></script>
+        <script src="/js/diagnosis.js"></script>
 
 </body>
 

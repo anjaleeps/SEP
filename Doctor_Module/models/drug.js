@@ -5,7 +5,7 @@ function Drug(){
 }
 
 Drug.prototype.findAll = function (){
-    let query = "SELECT * FROM drug"
+    let query = "SELECT * FROM drug order by drug_name"
     try{
         let result = db.any(query)
         console.log(result)

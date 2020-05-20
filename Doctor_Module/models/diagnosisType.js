@@ -5,7 +5,7 @@ function DiagnosisType(){
 }
 
 DiagnosisType.prototype.findAll = function (){
-    let query = "SELECT * FROM diagnosis_type"
+    let query = "SELECT * FROM diagnosis_type order by diagnosis_type"
     try{
         let result = db.any(query)
         console.log(result)
@@ -17,4 +17,4 @@ DiagnosisType.prototype.findAll = function (){
     }
 }
 
-module.exports = DiagnosisType
+module.exports = DiagnosisType 

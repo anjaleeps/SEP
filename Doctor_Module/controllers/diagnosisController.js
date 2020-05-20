@@ -27,5 +27,49 @@ exports.sendForm = async function(req, res){
 }
 
 exports.createNewDiagnosis = async function(req, res){
+    let diagnosis = new Diagnosis()
+    let prescription = new Prescription()
+    let diagnosisData = req.body.diagnosis
+    let drugs = diagnosisData.drugs
+    let appointmentId = diagnosis.appointmentId
 
+    try{
+        let data = await diagnosis.create(diagnosisData)
+        let diagnosisId = data.diagnosis_id
+        console.log(diagnosisId)
+        if (diagnosisId){
+            drugs.forEach( async (drug) => {
+                await prescription.create(diagnosisId, drug)
+            })
+            res.sendStatus(200)
+        }
+        else{
+            res.sendStatus(500)
+        }     
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}
+
+exports.showDiagnosis = async function(req, res){
+    let appointmentId = req.body.appointmentId
+    let diagnosisId = req.params.diagnosisId
+    let diagnosis = new Diagnosis()
+    let prescription = new Prescription()
+
+    try{
+        let diagnosisData = await diagnosis.findOneById(diagnosisId)
+        let prescriptionData = await prescription.findAllByDiagnosis(diagnosisId)
+        res.render('diagnosis/show', {
+            appointmentId: appointmentId,
+            diagnosis: diagnosisData,
+            prescription: prescriptionData
+        })
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
 }
