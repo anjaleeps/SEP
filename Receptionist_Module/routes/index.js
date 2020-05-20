@@ -1,3 +1,4 @@
+const home = require('./home.js')
 const patient = require('./patient')
 const patientSearch = require('./patient/search')
 const appointment = require('./appointment')
@@ -10,8 +11,6 @@ module.exports = function (app) {
     app.use('/appointment', appointment)
     app.use('/doctor', doctor)
     app.use('/session', session)
-    app.get('/', (req, res) => {
-        res.render('home')
-    })
+    app.use('/', home)
 } 
 

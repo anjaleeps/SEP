@@ -3,14 +3,14 @@ let submitButton = document.querySelector("#submitButton").addEventListener('cli
 async function registerPatient(e) {
     e.preventDefault()
     let formData = {
-        firstName: document.querySelector('#inputFirstName').value,
-        lastName: document.querySelector('#inputLastName').value,
-        phoneNumber: document.querySelector('#inputPhoneNumber').value,
-        birthDate: document.querySelector('#inputBirthDate').value,
-        email: document.querySelector('#inputEmail').value,
-        houseNumber: document.querySelector('#inputHouseNumber').value,
-        street: document.querySelector('#inputStreet').value,
-        city: document.querySelector('#inputCity').value
+        firstName: document.querySelector('#cfirstname').value,
+        lastName: document.querySelector('#clastname').value,
+        phoneNumber: document.querySelector('#cphonenumber').value,
+        birthDate: document.querySelector('#cbirthdate').value,
+        email: document.querySelector('#cemail').value,
+        houseNumber: document.querySelector('#chousenumber').value,
+        street: document.querySelector('#cstreet').value,
+        city: document.querySelector('#ccity').value
     }
 
     try {

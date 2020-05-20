@@ -14,8 +14,8 @@ Patient.prototype.findOneByPhone = async function (phoneNumber) {
 }
 
 Patient.prototype.findOneById = async function (patientId) {
-    var query = "SELECT patient_id, INITCAP(first_name) AS first_name, INITCAP(last_name) AS last_name, \
-     phone_number, email, TO_CHAR(birth_date, 'DD-MM-YYYY') AS birth_date, house_number, INITCAP(street) AS street,\
+    var query = "SELECT patient_id, INITCAP(first_name || ' ' || last_name) AS  patient_name, \
+     phone_number, email, extract(year from age(birth_date)) as age, house_number, INITCAP(street) AS street,\
      INITCAP(city) AS city FROM patient where patient_id = $1"
     try {
         let result = await db.oneOrNone(query, [patientId])

@@ -5,7 +5,12 @@ exports.findPatientById = function (req, res) {
     
     patient.findOneById(req.params.patientId)
         .then(patientData => {
-            res.render('patient/show', { patient: patientData })
+            if (patientData){
+                res.render('patient/show', { patient: patientData })
+            }
+            else{
+                res.sendStatus(404)
+            }
         })
         .catch(err => {
             console.log(err)
@@ -22,7 +27,7 @@ exports.findPatientByPhoneNumber = function (req, res) {
                 res.redirect(`/patient/${patientData.patient_id}`)
             }
             else{
-                res.render('patient/show', { patient: null })
+                res.render('patient/new')
             }
         })
         .catch(err => {

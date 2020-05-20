@@ -6,6 +6,7 @@ const DoctorType = require('../models/doctorType')
 exports.createAppointment = async function (req, res) {
     let appointment = new Appointment()
     let appointmentData = req.body.appointment
+    console.log(appointment)
     try {
         let sessionData = await appointment.findOne(appointmentData.sessionId, appointmentData.date)
         if (sessionData) {
@@ -42,7 +43,7 @@ exports.sendForm = async function (req, res) {
                 res.render('appointment/new', { patient: patientData, doctorTypes: doctorTypes })
             }
             else {
-                res.render('patient/show', { patient: null })
+                res.render('patient/new')
             }
         }
         catch (err) {
@@ -100,4 +101,16 @@ exports.getAppointment = function (req, res){
         .catch(err => {
             res.sendStatus(500)
         })
+}
+
+exports.sendHome = async function(req, res){
+    let appointment = new Appointment()
+    try{
+        let appointmentData = await appointment.findAll()
+        res.render('home', {appointments:appointmentData})
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
 }

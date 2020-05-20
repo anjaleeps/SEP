@@ -1,22 +1,22 @@
 const nextButton = document.querySelector('#nextButton')
 const cancelButton = document.querySelector('#cancelButton')
-const dataButton = document.querySelector('#dataButton')
-const inputDoctorName = document.querySelector('#inputDoctorName')
-const inputDoctorType = document.querySelector('#inputDoctorType')
-const inputSession = document.querySelector('#inputSession')
-const inputDate = document.querySelector('#inputDate')
-const sessionContent = document.querySelector('#sessionContent')
+const cdoctortype = document.querySelector('#cdoctortype')
+const mark = document.querySelector('#mark')
+const info = document.querySelector('#info')
+// const sessionContent = document.querySelector('#sessionContent')
+const doctorNameTemp = document.querySelector('#doctorNameTemp')
+const sessionTemp = document.querySelector('#sessionTemp')
+const radioTemp = document.querySelector('#radioTemp')
 
 let formStatus = 0
 let handlers = [showDoctors, showSessions, schedule]
 
 nextButton.addEventListener('click', showDoctors)
 cancelButton.addEventListener('click', cancel)
-dataButton.addEventListener('click', showSessionInfo)
 
 async function showDoctors(e) {
     e.preventDefault()
-    let doctorType = inputDoctorType.value
+    let doctorType = cdoctortype.value
     if (formStatus === 0 && doctorType != 0) {
         try {
             let data = await getDoctorList(doctorType)
@@ -44,21 +44,22 @@ async function getDoctorList(doctorType) {
 }
 
 function addDoctors(doctorList) {
+    let clone = doctorNameTemp.content.cloneNode(true)
+    let select = clone.querySelector('#cdoctor')
     doctorList.forEach(doctor => {
         let newOption = document.createElement('option')
         let text = document.createTextNode(doctor.doctor_name)
         newOption.appendChild(text)
         newOption.value = doctor.doctor_id
-        inputDoctorName.appendChild(newOption)
+        select.appendChild(newOption)
     })
-    inputDoctorName.parentElement.classList.remove('d-none')
-    cancelButton.classList.remove('d-none')
-    inputDoctorType.disabled = true
+    mark.appendChild(clone)
+    cdoctortype.disabled = true
 }
 
 async function showSessions(e) {
     e.preventDefault()
-    let doctorId = inputDoctorName.value
+    let doctorId = document.querySelector('#cdoctor').value
     if (formStatus === 1 && doctorId != 0) {
         try {
             let data = await getSessionList(doctorId)
@@ -86,25 +87,29 @@ async function getSessionList(doctorId) {
 }
 
 function addSessions(sessionList) {
+    let sessionClone = sessionTemp.content.cloneNode(true)
+    let csession = sessionClone.querySelector('#csession')
+    
     sessionList.forEach(session => {
-        inputSession.innerHTML += `<div class="form-check"> 
-                <input class="form-check-input" type="radio" name="gridRadios" value="${session.session_id}"> 
-                <label class="form-check-label" for="gridRadios1"> 
-                    ${session.day} from ${session.start_time} to ${session.end_time} 
-                </label> 
-            </div>`
+        let radioClone = radioTemp.content.cloneNode(true)
+        let option = radioClone.querySelector('#optionRadio')
+        let text = radioClone.querySelector('#text')
+        option.value = session.session_id
+        text.textContent= `${session.day} from ${session.start_time} to ${session.end_time}`
+        csession.appendChild(radioClone)
     })
-    inputSession.parentElement.classList.remove('d-none')
-    inputDate.parentElement.classList.remove('d-none')
-    dataButton.parentElement.classList.remove('d-none')
-    inputDoctorName.disabled = true
+    let dataButton = document.querySelector('#dataButton')
+    dataButton.addEventListener('click', showSessionInfo)
+    document.querySelector('#dateblock').style.display="block"
+    mark.append(sessionClone)
+    cdoctor.disabled = true
 }
 
 async function showSessionInfo(e) {
     e.preventDefault()
     let checked = document.querySelector('input[type="radio"]:checked')
-    let date = inputDate.value
-    if (checked && inputDate) {
+    let date = document.querySelector('#cdate').value
+    if (checked && date) {
         let sessionId = checked.value
         console.log(sessionId)
         console.log(date)
@@ -126,47 +131,36 @@ async function getSessionInfo(date, sessionId) {
 }
 
 function addSessionInfo(data) {
+    info.innerHTML=''
     if (data) {
-        sessionContent.innerHTML = `<ul class='list-group'> 
-            <li class='list-group-item'>
-                <div class="row">
-                    <div class="col-sm-3">Date:</div>
-                    <div class="col-sm-9"> ${data.date}</div>
-                </div>
-            </li>
-            <li class='list-group-item'>
-                <div class="row">
-                    <div class="col-sm-3">Availabe number:</div>
-                    <div class="col-sm-9"> ${data.available_number}</div>
-                </div>
-            </li>
-            <li class='list-group-item'>
-                <div class="row">
-                    <div class="col-sm-3">Apointment time:</div>
-                    <div class="col-sm-9"> ${data.appointment_time}</div>
-                </div>
-            </li>
-        </ul>`
+        let newP1 = document.createElement('p')
+        let text = document.createTextNode(`Available Number - ${data.available_number}`)
+        newP1.appendChild(text)
+        info.appendChild(newP1)
+        let newP2 = document.createElement('p')
+        text = document.createTextNode(`Appointment Time - ${data.appointment_time}`)
+        newP2.appendChild(text)
+        info.appendChild(newP2)
     }
     else {
-        sessionContent.innerHTML= `<ul class='list-group'> 
-            <li class='list-group-item'>No appointments scheduled yet</li>
-        </ul>`
+        let newP1 = document.createElement('p')
+        let text = document.createTextNode('No appointments scheduled yet')
+        newP1.appendChild(text)
+        info.appendChild(newP1)
     }
-    sessionContent.parentElement.classList.remove('d-none')
 }
 
 async function schedule(e){
     e.preventDefault()
     let checked = document.querySelector('input[type="radio"]:checked')
-    let date = inputDate.value
-
+    let date = document.querySelector('#cdate').value
+    console.log(document.querySelector('#patientId').value)
     if (formStatus === 2 && checked && date) {
         let appointment = {
             appointment: {
                 sessionId: checked.value,
                 date: date,   
-                patientId: document.querySelector('#staticPatientId').value
+                patientId: document.querySelector('#patientId').value
             }
         }
         try {
