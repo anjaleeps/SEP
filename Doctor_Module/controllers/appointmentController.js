@@ -55,3 +55,17 @@ exports.getPatientAppointment = async function(req, res){
         res.sendStatus(500)
     }
 }
+
+exports.changeStatus = async function(req, res){
+    let statusData = req.body.appointment
+    let appointment = new Appointment()
+
+    try{
+        await appointment.updateStatus(statusData)
+        res.sendStatus(200)
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(500)
+    }
+}

@@ -36,4 +36,14 @@ Appointment.prototype.findOneById = async function (appointmentId) {
     }
 }
 
+Appointment.prototype.updateStatus = async function(appointment){
+    let query = "update appointment set status=$1 where appointment_id=$2"
+    try{
+        await db.none(query, [appointment.status, appointment.appointmentId])
+    }
+    catch(err){
+        throw err
+    }
+}
+
 module.exports = Appointment
