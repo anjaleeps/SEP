@@ -3,6 +3,7 @@ let submitButton = document.querySelector("#submitButton").addEventListener('cli
 async function registerPatient(e) {
     e.preventDefault()
     let formData = {
+        patientId: document.querySelector('#patientId').value,
         firstName: document.querySelector('#cfirstname').value,
         lastName: document.querySelector('#clastname').value,
         phoneNumber: document.querySelector('#cphonenumber').value,
@@ -16,8 +17,7 @@ async function registerPatient(e) {
     try {
         let response = await sendPatientData(formData)
         if (response.ok) {
-            let data = await response.json()
-            let patientId = data.patientId
+            let patientId= formData.patientId
             window.location.pathname = '/patient/' + patientId
             return
         }
@@ -32,7 +32,7 @@ async function registerPatient(e) {
 
 async function sendPatientData(formData) {
     try {
-        let response = await fetch('/patient/', {
+        let response = await fetch(`/patient/${formData.patientId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

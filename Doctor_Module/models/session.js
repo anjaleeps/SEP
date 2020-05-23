@@ -42,4 +42,17 @@ Session.prototype.findOneById = async function (sessionId) {
     }
 }
 
+Session.prototype.findOne = async function(sessionId){
+    let query = "select to_char(start_time, 'HH:MI') as start_time, to_char(end_time, 'HH:MI') as end_time from session where session_id=$1"
+
+    try{
+        let result = await db.oneOrNone(query, sessionId)
+        console.log(result)
+        return result
+    }
+    catch(err){
+        throw err
+    }
+}
+
 module.exports = Session

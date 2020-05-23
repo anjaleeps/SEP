@@ -50,8 +50,14 @@ async function createNewAppointment(e) {
         }
 
         try {
-            await postDiagnosis(diagnosisData, appointmentId)
-            window.location.pathname = `/appointment/${appointmentId}`
+            let response = await postDiagnosis(diagnosisData, appointmentId)
+            if(response.ok){
+                window.location.pathname = `/appointment/${appointmentId}`
+            }
+            else{
+                let error = await response.json()
+                console.log(error)
+            }
         }
         catch (err) {
             console.log(err)
@@ -69,7 +75,7 @@ async function postDiagnosis(diagnosisData, appointmentId) {
             },
             body: JSON.stringify({diagnosis: diagnosisData})
         })
-        return
+        return response
     }
     catch (err) {
         throw err

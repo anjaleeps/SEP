@@ -18,16 +18,17 @@ Session.prototype.findAllByDoctor = async function (doctorId){
 }
 
 Session.prototype.findOneById = async function(sessionId){
-    let query = "select start_time from session where session_id=$1"
+    let query = "select start_time, day from session where session_id=$1"
     try{
         let result = await db.one(query, sessionId)
         console.log(result)
         return result
     }
     catch(err){
-        console.log(err)
+        console.log("session"+err)
         throw err
     }
 }
+
 
 module.exports = Session

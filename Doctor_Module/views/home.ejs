@@ -44,8 +44,11 @@
                                     <h5><%= `${session.day.toUpperCase()}, ${session.date.toUpperCase()}` %></h5>
                                 </div>
                                 <div style="margin-bottom:20px;">
-                                    <p><%= session.patient_count%></p>
-                                    <p>Patients</p>
+                                    <div style="font-size: 27px;">
+                                        <p><%= session.patient_count%></p>
+                                        <p>Patients</p>
+                                    </div>
+                                   
                                     <a href=<%= `/appointment?sessionId=${session.session_id}&date=${session.date}` %> class="btn btn-theme"> More Info</a>
                                 </div>
 

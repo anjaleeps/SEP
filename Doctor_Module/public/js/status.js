@@ -17,8 +17,14 @@ async function changeStatus(e) {
             }
         }
         try{
-            await postStatus(appointmentId, appointment)
-            window.location.reload(true)
+            let response = await postStatus(appointmentId, appointment)
+            if (response.ok){
+                window.location.reload(true)
+            }
+            else{
+                let error = await response.json()
+                console.log(error)
+            }
         }
         catch(err){
             console.log(err)
@@ -36,6 +42,7 @@ async function postStatus(appointmentId, appointment){
             },
             body: JSON.stringify(appointment)
         })
+        return response
     }
     catch(err){
         throw err

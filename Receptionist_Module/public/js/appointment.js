@@ -154,7 +154,7 @@ async function schedule(e){
     e.preventDefault()
     let checked = document.querySelector('input[type="radio"]:checked')
     let date = document.querySelector('#cdate').value
-    console.log(document.querySelector('#patientId').value)
+    console.log(date)
     if (formStatus === 2 && checked && date) {
         let appointment = {
             appointment: {
@@ -166,7 +166,6 @@ async function schedule(e){
         try {
             let data = await postAppointment(appointment)
             let appointmentId = data.appointmentId
-            console.log(appointmentId)
             window.location.pathname = `/appointment/${appointmentId}`
         }
         catch (err) {
@@ -185,7 +184,13 @@ async function  postAppointment(appointment){
             body: JSON.stringify(appointment)
         })
         let data = await response.json()
-        return data
+
+        if (response.ok){
+            return data
+        }
+        console.log(data)
+        throw new Error()
+        
     }
     catch(err){
         throw err

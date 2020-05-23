@@ -34,7 +34,7 @@
             <div class="row mt mb">
                 <div class="col-lg-12">
                     <div class="row content-panel" style="font-size:13px;">
-                        <div class="col-md-4 profile-text mt mb centered">
+                        <div class="col-md-6 profile-text mt mb centered">
                             <div class="right-divider hidden-sm hidden-xs">
                                 <h4><%=session.day.toUpperCase() %>, <%= session.date %></h4>
                                 <h6>DATE</h6>
@@ -42,10 +42,10 @@
                                 <h6>DURATION</h6>
                                 <h4><%= appointments.length %></h4>
                                 <h6>TOTAL PATIENTS</h6>
-                            </div>    
+                            </div>
                         </div>
-                        <!-- /col-md-4 -->
-                        <div class="col-md-4 profile-text">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-5 profile-text mt" style>
                             <h3><%= session.doctor_name %></h3>
                             <h6><%= session.doctor_type %></h6>
                             <p>Session Id: #<%=session.session_id %></p>
@@ -53,49 +53,64 @@
                             <br>
                             </p>
                         </div>
-                       
+
                     </div>
                     <!-- /row -->
                 </div>
+                <div class="col-sm-12 mt">
+                    <section class="panel">
+                        <header class="panel-heading wht-bg">
+                            <h4 class="gen-case">
+                                List of Patients
+                            </h4>
+                        </header>
+                        <div class="panel-body minimal">
 
-                <div class="col-md-10 mt">
-                    <section class="task-panel tasks-widget">
-                        <div class="panel-heading">
-                            <div class="pull-left">
-                                <h5><i class="fa fa-tasks"></i> List of Patients</h5>
-                            </div>
-                            <br>
-                        </div>
-                        <div class="panel-body">
-                            <div class="task-content">
-                                <ul id="sortable" class="task-list">
-                                    <% appointments.forEach(appointment => { %>
-                                    <li class="list-primary">
-                                        <div class="task-checkbox">
-                                            <p><%= appointment.patient_number %>.</p>
-                                        </div>
-                                        <div class="task-title">
-                                            <a href=<%= `appointment/${appointment.appointment_id}`%>>
-                                                <span class="task-title-sp"><%= appointment.patient_name %></span>
-                                            </a>
-                                            <div class="pull-right hidden-phone">
+                            <div class="table-inbox-wrap ">
+                                <table class="table table-inbox table-hover">
+                                    <tbody>
+                                        <tr class="unread">
+                                            <td class="inbox-small-cells">PATIENT NUMBER</td>
+                                            <td class="inbox-small-cells"></td>
+                                            <td class="inbox-small-cells"></td>
+                                            <td class="view-message  dont-show">PATIENT NAME</td>
+                                            <td class="view-message  inbox-small-cells">SCHEDULED TIME</td>
+                                            <td class="view-message ">STATUS</td>
+                                            <td class="view-message "></td>
+                                            <td class="view-message">APPOINTMENT ID</td>
+                                        </tr>
+                                        <% appointments.forEach(appointment => { %>
+                                        <tr class="read">
+                                            <td class="inbox-small-cells"><%= appointment.patient_number %></td>
+                                            <td class="inbox-small-cells"></td>
+                                            <td class="inbox-small-cells"></td>
+                                            <td class="view-message  dont-show">
+                                                <a href=<%= `appointment/${appointment.appointment_id}` %>>
+                                                    <%= appointment.patient_name %>
+                                                </a>
+                                            </td>
+                                            <td class="view-message  inbox-small-cells"><%= appointment.scheduled_time%>
+                                            </td>
+                                            <td class="view-message ">
                                                 <% if (appointment.status.toLowerCase() =='created') { %>
                                                 <span class="badge bg-theme"><%= appointment.status %></span>
                                                 <% } else if (appointment.status.toLowerCase() =='completed'){ %>
                                                 <span class="badge bg-warning"><%= appointment.status %></span>
                                                 <% } else  if (appointment.status.toLowerCase() =='missed'){%>
                                                 <span class="badge bg-important"><%= appointment.status %></span>
-                                                <% } %> </div>
-                                        </div>
-                                    </li>
-                                    <% }) %>
-
-                                </ul>
+                                                <% } %>
+                                            </td>
+                                            <td class="view-message "></td>
+                                            <td class="view-message"><%=appointment.appointment_id%></td>
+                                        </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
                             </div>
-
                         </div>
                     </section>
                 </div>
+                
             </div>
         </section>
         <%- include ('../partials/footer') %>

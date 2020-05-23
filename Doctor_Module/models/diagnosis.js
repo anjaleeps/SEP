@@ -60,4 +60,17 @@ Diagnosis.prototype.findOneById = async function (diagnosisId) {
     }
 }
 
+Diagnosis.prototype.findAllByAppointment = async function(appointmentId){
+    let query = "select diagnosis_id from diagnosis where appointment_id=$1"
+    
+    try{
+        let result = await db.any(query, appointmentId)
+        console.log(result)
+        return result
+    }
+    catch(err){
+        throw err
+    }
+}
+
 module.exports = Diagnosis

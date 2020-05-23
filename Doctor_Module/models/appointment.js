@@ -23,7 +23,7 @@ Appointment.prototype.findAllBySession = async function (sessionId, date) {
 }
 
 Appointment.prototype.findOneById = async function (appointmentId) {
-    let query = "select appointment_id, to_char(date, 'YYYY-MM-DD') as date, patient_number, \
+    let query = "select appointment_id, session_id, to_char(date, 'YYYY-MM-DD') as date, patient_number, \
         to_char(scheduled_time, 'HH:MI') as scheduled_time, patient_id, status \
         from appointment where appointment_id=$1"
     try{
@@ -46,4 +46,14 @@ Appointment.prototype.updateStatus = async function(appointment){
     }
 }
 
-module.exports = Appointment
+Appointment.prototype.updateStatusAuto = async function(appointmentId){
+    let query = "update appointment set status='missed' where appointment_id=$1"
+    try{
+        await db.none(query, [appointmentId])
+    }
+    catch(err){
+        throw err
+    }
+}
+
+module.exports = Appointment  
